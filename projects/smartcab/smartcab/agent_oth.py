@@ -1,16 +1,14 @@
 import random
-import math
-import os
+import math,os
 from environment import Agent, Environment
 from planner import RoutePlanner
 from simulator import Simulator
-
 
 class LearningAgent(Agent):
 	""" An agent that learns to drive in the Smartcab world.
 		This is the object you will be modifying. """ 
 
-	def __init__(self, env, learning=False, epsilon=1.0, alpha=0.5, epsilon_rule=1):
+	def __init__(self, env, learning=False, epsilon=1.0, alpha=0.9):
 		super(LearningAgent, self).__init__(env)     # Set the agent in the evironment 
 		self.planner = RoutePlanner(self.env, self)  # Create a route planner
 		self.valid_actions = self.env.valid_actions  # The set of valid actions
@@ -20,8 +18,8 @@ class LearningAgent(Agent):
 		self.Q = dict()          # Create a Q-table which will be a dictionary of tuples
 		self.epsilon = epsilon   # Random exploration factor
 		self.alpha = alpha       # Learning factor
-		self.try_cnt = 1
-		self.epsilon_rule = epsilon_rule
+		self.counter = 1
+
 		###########
 		## TO DO ##
 		###########
@@ -43,22 +41,11 @@ class LearningAgent(Agent):
 		# Update additional class parameters as needed
 		# If 'testing' is True, set epsilon and alpha to 0
 		if testing:
-			self.epsilon = 0
-		elif self.epsilon_rule==1:
-			self.epsilon -=0.05
-		elif self.epsilon_rule==2:
-			self.epsilon = 1.0/(self.try_cnt)
-		elif self.epsilon_rule==3: 
-			self.epsilon = 1.0/(self.try_cnt**2)
-		elif self.epsilon_rule==4: 
-			self.epsilon = math.e**(self.try_cnt/-10.0)
-		elif self.epsilon_rule==5: 
-			self.epsilon = 0.999**self.try_cnt #math.cos(self.try_cnt/3.0)
+			self.alpha = 0
+			self.epsilon= 0
 		else:
-			return None
-		
-		self.try_cnt+=1
-			
+			self.epsilon = 0.999**self.counter
+			self.counter += 1
 		return None
 
 	def build_state(self):
@@ -74,9 +61,13 @@ class LearningAgent(Agent):
 		########### 
 		## TO DO ##
 		###########
-		# Set 'state' as a tuple of relevant data for the agent        
-		state = (waypoint,inputs['light'],inputs['oncoming'],inputs['left']) #inputs['right'],
-
+		# Set 'state' as a tuple of relevant data for the agent
+		# When learning, check if the state is in the Q-table
+		#   If it is not, create a dictionary in the Q-table for the current 'state'
+		#   For each action, set the Q-value for the state-action pair to 0
+		
+		#this reflects the final optimized model
+		state = (waypoint, inputs['light'], inputs['left'], inputs['oncoming'])
 		return state
 
 
@@ -88,17 +79,9 @@ class LearningAgent(Agent):
 		## TO DO ##
 		###########
 		# Calculate the maximum Q-value of all actions for a given state
-		
-		maxQ=max(self.Q[state].values())
-		
-		#try:
-			#qlist=[self.Q[(state,None)],self.Q[(state,'left')],self.Q[(state,'right')],self.Q[(state,'forward')]]
-		#	maxQ=None#max(qlist)
-		#except:
-			#self.createQ(state)
-		#	maxQ=None	
-
-		return maxQ 
+		maxAction = max(self.Q[state], key = lambda x: self.Q[state][x])
+		maxQ = self.Q[state][maxAction]
+		return maxQ
 
 
 	def createQ(self, state):
@@ -110,35 +93,21 @@ class LearningAgent(Agent):
 		# When learning, check if the 'state' is not in the Q-table
 		# If it is not, create a new dictionary for that state
 		#   Then, for each action available, set the initial Q-value to 0.0
-		if state in self.Q:
-			pass
-		else:
-			self.Q[state]={None:0,'left':0,'right':0,'forward':0}
-		return
+		if state not in self.Q:
+			self.Q[state] = {'left': 0, 'right':0, 'forward':0, None:0}
+
+		return 
 
 
 	def choose_action(self, state):
 		""" The choose_action function is called when the agent is asked to choose
-			which action to take, based on the 'state' the smartcab is in. 
-			[None,'left','right','forward']) """
+			which action to take, based on the 'state' the smartcab is in. """
 
 		# Set the agent state and default action
+		self.old_state = self.state
 		self.state = state
 		self.next_waypoint = self.planner.next_waypoint()
-		
-		#print self.next_waypoint
-
-		if self.learning and random.random() > self.epsilon:
-			
-			maxQ=self.get_maxQ(state) 
-			#print self.Q[state], maxQ
-			cand_actions=[act for act in self.Q[state] if self.Q[state][act]==maxQ]
-			
-			action=random.choice(cand_actions)
-			#print "MaxQ, action:", maxQ, action
-                 
-		else:
-			action=random.choice( self.valid_actions)
+		action = random.choice(self.valid_actions)
 
 		########### 
 		## TO DO ##
@@ -146,7 +115,13 @@ class LearningAgent(Agent):
 		# When not learning, choose a random action
 		# When learning, choose a random action with 'epsilon' probability
 		#   Otherwise, choose an action with the highest Q-value for the current state
- 
+		if self.learning and random.random() > self.epsilon:
+			maxVal = self.get_maxQ(state)
+			list_act=self.Q[state]
+
+			#choose randomly if there are more than one max values
+			pos_actions = [act for act in list_act if list_act[act] == maxVal]
+			action = random.choice(pos_actions)
 		return action
 
 
@@ -160,11 +135,9 @@ class LearningAgent(Agent):
 		###########
 		# When learning, implement the value iteration update rule
 		#   Use only the learning rate 'alpha' (do not use the discount factor 'gamma')
-		#print self.Q[state][action], reward
-		temp = self.Q[state][action]
+		old_value = self.Q[state][action]
 		if self.learning:
-			self.Q[state][action] = (1-self.alpha)*temp + self.alpha*reward
-			#print self.Q[state][action]
+			self.Q[state][action] = (1-self.alpha)*old_value + self.alpha*(reward)
 
 		return
 
@@ -183,7 +156,7 @@ class LearningAgent(Agent):
 		return
 		
 
-def run(tolerance_,alpha_,epsilon_rule_,detail_out_=False):
+def run():
 	""" Driving function for running the simulation. 
 		Press ESC to close the simulation, or [SPACE] to pause the simulation. """
 
@@ -193,7 +166,7 @@ def run(tolerance_,alpha_,epsilon_rule_,detail_out_=False):
 	#   verbose     - set to True to display additional output from the simulation
 	#   num_dummies - discrete number of dummy agents in the environment, default is 100
 	#   grid_size   - discrete number of intersections (columns, rows), default is (8, 6)
-	env = Environment(verbose=False, num_dummies=100, grid_size=(8,6), detail_out=detail_out_)
+	env = Environment(verbose=False)
 	
 	##############
 	# Create the driving agent
@@ -201,7 +174,7 @@ def run(tolerance_,alpha_,epsilon_rule_,detail_out_=False):
 	#   learning   - set to True to force the driving agent to use Q-learning
 	#    * epsilon - continuous value for the exploration factor, default is 1
 	#    * alpha   - continuous value for the learning rate, default is 0.5
-	agent = env.create_agent(LearningAgent,learning=True, epsilon=1, alpha=alpha_, epsilon_rule=epsilon_rule_)
+	agent = env.create_agent(LearningAgent, learning=True)
 	
 	##############
 	# Follow the driving agent
@@ -216,27 +189,17 @@ def run(tolerance_,alpha_,epsilon_rule_,detail_out_=False):
 	#   display      - set to False to disable the GUI if PyGame is enabled
 	#   log_metrics  - set to True to log trial and simulation results to /logs
 	#   optimized    - set to True to change the default log file name
-	sim = Simulator(env, update_delay=0.0, display=False, log_metrics=True, optimized=True, detail_out=detail_out_)
+	sim = Simulator(env, update_delay=0, log_metrics=True, optimized=True, display=False)
 	
 	##############
 	# Run the simulator
 	# Flags:
 	#   tolerance  - epsilon tolerance before beginning testing, default is 0.05 
 	#   n_test     - discrete number of testing trials to perform, default is 0
-	print "tolerance_=",tolerance_, " alpha_=",alpha_, " epsilon_rule_=",epsilon_rule_
-	sim.run(n_test=10, tolerance=tolerance_)
+	sim.run(n_test=200, tolerance=0.0005)
 
 
 if __name__ == '__main__':
 	os.chdir(u'C:\\GitHub\\machine-learning\\projects\\smartcab')
-	
-	#os.chdir('C:\\Users\\sangh\\Documents\\GitHub\\machine-learning\\projects\\smartcab')
-	
-	#run(tolerance_=0.0001, alpha_=0.99, epsilon_rule_=3, detail_out_=False) # A+ A
-	#run(tolerance_=0.001, alpha_=0.99, epsilon_rule_=2, detail_out_=False) #A+ A+
-	#run(tolerance_=0.005, alpha_=0.95, epsilon_rule_=2, detail_out_=False) #A+ A+
-	#run(tolerance_=0.005, alpha_=0.65, epsilon_rule_=1, detail_out_=False) #F B
-	#run(tolerance_=0.001, alpha_=0.9, epsilon_rule_=4, detail_out_=False) #A+ A   -20
-	run(tolerance_=0.0000001, alpha_=0.85, epsilon_rule_=4, detail_out_=False) #A+ A+
-	#run(tolerance_=0.00001, alpha_=0.95, epsilon_rule_=1, detail_out_=False) # No optimum
-	#3  
+
+	run()

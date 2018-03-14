@@ -45,13 +45,13 @@ class LearningAgent(Agent):
 		if testing:
 			self.epsilon = 0
 		elif self.epsilon_rule==1:
-			self.epsilon -=0.05
+			self.epsilon -=0.01
 		elif self.epsilon_rule==2:
 			self.epsilon = 1.0/(self.try_cnt)
 		elif self.epsilon_rule==3: 
 			self.epsilon = 1.0/(self.try_cnt**2)
 		elif self.epsilon_rule==4: 
-			self.epsilon = math.e**(self.try_cnt/-10.0)
+			self.epsilon = math.e**(self.try_cnt/-20.0)
 		elif self.epsilon_rule==5: 
 			self.epsilon = 0.999**self.try_cnt #math.cos(self.try_cnt/3.0)
 		else:
@@ -75,7 +75,7 @@ class LearningAgent(Agent):
 		## TO DO ##
 		###########
 		# Set 'state' as a tuple of relevant data for the agent        
-		state = (waypoint,inputs['light'],inputs['oncoming'],inputs['left']) #inputs['right'],
+		state = (waypoint,inputs['light'],inputs['left'],inputs['right'],input['oncoming'])
 
 		return state
 
@@ -224,7 +224,7 @@ def run(tolerance_,alpha_,epsilon_rule_,detail_out_=False):
 	#   tolerance  - epsilon tolerance before beginning testing, default is 0.05 
 	#   n_test     - discrete number of testing trials to perform, default is 0
 	print "tolerance_=",tolerance_, " alpha_=",alpha_, " epsilon_rule_=",epsilon_rule_
-	sim.run(n_test=10, tolerance=tolerance_)
+	sim.run(n_test=200, tolerance=tolerance_)
 
 
 if __name__ == '__main__':
@@ -232,11 +232,5 @@ if __name__ == '__main__':
 	
 	#os.chdir('C:\\Users\\sangh\\Documents\\GitHub\\machine-learning\\projects\\smartcab')
 	
-	#run(tolerance_=0.0001, alpha_=0.99, epsilon_rule_=3, detail_out_=False) # A+ A
-	#run(tolerance_=0.001, alpha_=0.99, epsilon_rule_=2, detail_out_=False) #A+ A+
-	#run(tolerance_=0.005, alpha_=0.95, epsilon_rule_=2, detail_out_=False) #A+ A+
-	#run(tolerance_=0.005, alpha_=0.65, epsilon_rule_=1, detail_out_=False) #F B
-	#run(tolerance_=0.001, alpha_=0.9, epsilon_rule_=4, detail_out_=False) #A+ A   -20
-	run(tolerance_=0.0000001, alpha_=0.85, epsilon_rule_=4, detail_out_=False) #A+ A+
-	#run(tolerance_=0.00001, alpha_=0.95, epsilon_rule_=1, detail_out_=False) # No optimum
-	#3  
+	run(tolerance_=0.001, alpha_=0.90, epsilon_rule_=5, detail_out_=False)
+	#3
