@@ -14334,11 +14334,11 @@ test_{network} = bottleneck_features['test']</code></pre>
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">### TODO: Obtain bottleneck features from another pre-trained CNN.</span>
 
-<span class="c1"># I have tried all networks, the test accuracy were</span>
-<span class="c1"># VGG19:       52.75%</span>
-<span class="c1"># Resnet50:    81.22%</span>
-<span class="c1"># InceptionV3: 77.87%</span>
-<span class="c1"># Xception:    84.93% --&gt; Best model</span>
+<span class="c1"># All networks have been tried, the test accuracy for each are as follows:</span>
+<span class="c1"># VGG19:       53%</span>
+<span class="c1"># Resnet50:    81%</span>
+<span class="c1"># InceptionV3: 77%</span>
+<span class="c1"># Xception:    83% --&gt; Best model</span>
 
 <span class="n">network</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;VGG19&#39;</span><span class="p">,</span> <span class="s1">&#39;Resnet50&#39;</span><span class="p">,</span> <span class="s1">&#39;InceptionV3&#39;</span><span class="p">,</span> <span class="s1">&#39;Xception&#39;</span><span class="p">]</span>
 
@@ -14365,14 +14365,15 @@ test_{network} = bottleneck_features['test']</code></pre>
 
 </code></pre>
 <p><strong>Question 5:</strong> Outline the steps you took to get to your final CNN architecture and your reasoning at each step.  Describe why you think the architecture is suitable for the current problem.</p>
-<p><strong>Answer:</strong> I have used Xception bottleneck features. The architecture is suitable as its performance is better than other bottleneck features.</p>
+<p><strong>Answer:</strong> The Xception bottleneck features have been used. The architecture is suitable as its performance is better than other bottleneck features.All networks have been tried, the test accuracy for each network are as follows:</p>
+<h1 id="VGG19:-------53%">VGG19:       53%<a class="anchor-link" href="#VGG19:-------53%">&#182;</a></h1><h1 id="Resnet50:----81%">Resnet50:    81%<a class="anchor-link" href="#Resnet50:----81%">&#182;</a></h1><h1 id="InceptionV3:-77%">InceptionV3: 77%<a class="anchor-link" href="#InceptionV3:-77%">&#182;</a></h1><h1 id="Xception:----83%---&gt;-Best-model">Xception:    83% --&gt; Best model<a class="anchor-link" href="#Xception:----83%---&gt;-Best-model">&#182;</a></h1><p>The pooling layer of the model is GlobalMaxPooling2D, which is suitable for spatial data. The core layer is Dense, which is regular densely-connected neural network layer. The number of units for the layer 133, with softmax activation function.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[31]:</div>
+<div class="prompt input_prompt">In&nbsp;[48]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">### TODO: Define your architecture.</span>
@@ -14398,9 +14399,9 @@ test_{network} = bottleneck_features['test']</code></pre>
 <pre>_________________________________________________________________
 Layer (type)                 Output Shape              Param #   
 =================================================================
-global_average_pooling2d_3 ( (None, 2048)              0         
+global_average_pooling2d_4 ( (None, 2048)              0         
 _________________________________________________________________
-dense_3 (Dense)              (None, 133)               272517    
+dense_4 (Dense)              (None, 133)               272517    
 =================================================================
 Total params: 272,517
 Trainable params: 272,517
