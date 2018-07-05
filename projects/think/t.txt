@@ -1,0 +1,6 @@
+really like reflexisve thinking and writing that helps me to think clearly. will do some work projects reviewing, a&d reviewing that is to be integrated with my rsm writing. 
+recently i have started to prep for da and ds. Just reviewed imbalanced data set modeling. The question is how will you approach data modeling with imbalanced data sets? When you faced with classification of a data set that exhibits imbalanced data samples. The common approach is to use SMOTE (synthetic minority oversample technique). instead of simply duplicate small class data points, use interpolation to create synthetic data points for the small class set. 
+
+
+all right. I will come back to this after reviewing my work projects and a&d. 
+I will upload my rsm (da and ds) to gmail 
