@@ -1,0 +1,22 @@
+Writing this article to help me to review and analysis technologies used in my work projects. 
+========================
+5G
+5th gen mobile network technology
+supports faster download speed, expected to be faster than 4G
+how this can be done? use higher frequency spectrum. 
+
+
+Fixed wireless access on 5G
+one of the last mile access technology, compared to traditional DSL, fiber, coax and so on. 
+waiting for 5G because of large bandwidth required for broadband internet connection 
+the advantage of FWA is cost saving. 
+FWA market is expected to be growing. 
+
+who is the major 5G vendor and standard setter? 
+why 5G is good?  or Really? 
+
+better home network 
+
+converged access network
+
+
