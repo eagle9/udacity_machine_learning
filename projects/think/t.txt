@@ -54,7 +54,7 @@ next test Sep, Nov, Jan, Mar
 
 home with kids, swimming, teach dad driving and testing, thinking what's next 
 July 8
-=====
+======
 sf question: 
   where to look for spa for sale? 
   buying a store, how to assess location and its business potential, worth of equipments, and son son
@@ -68,7 +68,7 @@ it is not easy to start my day concentrated. getting up immediately face young c
 this morning i continue to learn about faculty teaching. 
 
 July 9 Monday
-=======
+=============
 this week prep a 1on1 with k. review of what have been done, proposal 2 relevant and advanced projects going forward
 continue review past work projects and update rsm
 ----scrum contest follow up
@@ -79,4 +79,11 @@ also info crunching regarding retirement account, benefits, reimb account, stock
   uverse kpi dashboard
   subscriber py code close the case.
   FWA, gpon, g.fast, wifi
+ 
+July 10
+=======
+first thing is subscriber code finish up  
+  rg swap matrix
+  airties data with sangho 
+  kpi dashboard review
   

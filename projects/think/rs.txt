@@ -1,0 +1,49 @@
+                       Shaun Yi (Xiaochuan Yi)
+                       Email:  voyieger@gmail.com
+                       Mobile: 925-3366819
+Summary
+=======
+Senior software engineer and data scientist with hands-on experiences of telecom carrier network algorithm and analytics software development.  Experienced with harnessing wide range of data systems, such as DBMS, HDFS, Teradata, NoSQL(Cassandra and MongoDB), and Apache Kafka. Keen on analytics development that help business saving cost, discover network operation issues,  optimizations,  and trouble shoot.  
+Supportive and enthusiastic team player that dedicated to streamlining processes and efficiently resolve project issues. 
+
+Skill Highlights
+================
+- Data collection and management
+- Business analytics solution development, machine learning application 
+- Fluent in programming with Python, Java, C and C++
+- Linux system administration and Nagios server monitoring
+- Algorithm coding and debugging 
+- Web application development
+
+Experiences
+===========
+Data scientist  (principal member)             2009- present
+AT&T Labs Northern California
+- Home network management
+- Access network analytics 
+
+Software engineer (senior member)                           2005 – 2009
+- Fiber network planning tool
+- DSL diagnostic tool
+
+Education and Certification
+===========================
+Bachelor, electrical engineering, Shanghai Jiaotong University, June 1996
+Ph.D, compuer science, University of Georgia, July 2005
+CFA Level I Exam,  Dec 2008
+Coursera Machine Learning Certification, 2016
+Udacity Machine Learning Nano Degree, Jun 2018
+
+Honors
+======
+5 patents at AT&T labs
+Scholarship in Shanghai Jiaotong University
+2nd place in state High School Physics Olympiad 
+ 
+
+ 
+
+
+
+
+
