@@ -89,9 +89,12 @@ first thing is subscriber code finish up
 
 July 11
 =======
-  sub data finish
+  sub data finish, find small diff between k and y, on ewl and service profile, to dig more tomorrow
   trending finish, kpi dashboard review
      quick web app review, flask or django
      mobile app dev quick learn
   
+  1on1 prep, sub, propose ML app, grasp airties data, dispatch predict @lsbbt
+  study lsbbt and integrate into rs
+
    
