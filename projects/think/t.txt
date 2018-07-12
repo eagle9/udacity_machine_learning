@@ -86,4 +86,12 @@ first thing is subscriber code finish up
   rg swap matrix
   airties data with sangho 
   kpi dashboard review
+
+July 11
+=======
+  sub data finish
+  trending finish, kpi dashboard review
+     quick web app review, flask or django
+     mobile app dev quick learn
   
+   
