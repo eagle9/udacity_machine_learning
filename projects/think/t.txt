@@ -95,6 +95,7 @@ July 11
      mobile app dev quick learn
   
   1on1 prep, sub, propose ML app, grasp airties data, dispatch predict @lsbbt
+     problem line going back 2015
   study lsbbt and integrate into rs
 
    

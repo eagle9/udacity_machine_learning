@@ -3,7 +3,7 @@
                        Mobile: 925-3366819
 Summary
 =======
-Senior software engineer and data scientist with hands-on experiences of telecom carrier network algorithm and analytics software development.  Experienced with harnessing wide range of data systems, such as DBMS, HDFS, Teradata, NoSQL(Cassandra and MongoDB), and Apache Kafka. Keen on analytics development that help business saving cost, discover network operation issues,  optimizations,  and trouble shoot.  
+Senior software engineer and data scientist with hands-on experiences of telecom network algorithm and analytics software development.  Experienced with harnessing wide range of data systems, such as DBMS, HDFS, Teradata, NoSQL(Cassandra and MongoDB), and Apache Kafka. Keen on analytics development that help business saving cost, discover network operation issues,  optimizations,  and trouble shoot.  
 Supportive and enthusiastic team player that dedicated to streamlining processes and efficiently resolve project issues. 
 
 Skill Highlights
@@ -17,14 +17,14 @@ Skill Highlights
 
 Experiences
 ===========
-Data scientist  (principal member)             2009- present
+Data engineering and analyst  (principal member)             2009- present
 AT&T Labs Northern California
 - Home network management
 - Access network analytics 
 
 Software engineer (senior member)                           2005 – 2009
+- Access Network 
 - Fiber network planning tool
-- DSL diagnostic tool
 
 Education and Certification
 ===========================
